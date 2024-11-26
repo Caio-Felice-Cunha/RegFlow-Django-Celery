@@ -1,3 +1,34 @@
-<h1>Registration Confirmed</h1>
-<p>Your registration has been confirmed. Thank you for your interest in IASUMMIT!</p>
-<p>Your invitation will be sent to your email shortly.</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmed - IASUMMIT 2024</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-box">
+            <div class="success-icon">✓</div>
+            <h1>Registration Confirmed!</h1>
+            <div class="confirmation-message">
+                <p>Thank you for registering for IASUMMIT 2024!</p>
+                <p>We're excited to have you join us for this incredible event.</p>
+            </div>
+            <div class="next-steps">
+                <h2>What's Next?</h2>
+                <ul>
+                    <li>Check your email for your personalized invitation</li>
+                    <li>Mark your calendar for the event</li>
+                    <li>Follow us on social media for updates</li>
+                </ul>
+            </div>
+            <div class="action-buttons">
+                <a href="{% url 'index' %}" class="home-btn">Return to Homepage</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
