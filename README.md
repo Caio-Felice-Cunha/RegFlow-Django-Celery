@@ -1,48 +1,151 @@
-# RegFlow+  
+# RegFlow-Django-Celery 🌐🚀  
 
-RegFlow+ is a modern Django application integrated with Celery to demonstrate the power of distributed programming. The project showcases a streamlined user registration workflow for events or courses, emphasizing scalability, performance, and user-centric communication.  
+**A streamlined Django-based registration flow powered by Celery for asynchronous task management.**
 
-## Key Features  
-1. **User Registration Workflow**  
-   - Users register for an event or course and are redirected to a confirmation page with their details.  
-   - A personalized invitation (PNG file) is automatically generated featuring their name and event date.  
+---
 
-2. **Automated Notifications**  
-   - Users receive a confirmation email with event details and acknowledgment of successful registration.  
+## 📖 Overview  
+RegFlow-Django-Celery is a Django project that integrates Celery and Redis to handle asynchronous tasks like personalized email invitations with embedded registration tokens. This project demonstrates a practical implementation of background task execution in a Django application.  
 
-3. **Asynchronous Task Management with Celery**  
-   - Time-intensive tasks, such as generating invitations and sending emails, are offloaded to Celery workers.  
-   - This ensures a seamless and responsive user experience.  
+---
 
-## Why RegFlow+?  
-RegFlow+ is designed for developers looking to:  
-- Integrate **Celery** with **Django** for handling asynchronous tasks.  
-- Improve application performance by offloading resource-heavy processes.  
-- Build real-world, user-centric applications with robust registration workflows.  
+## 🎨 Architecture  
 
-## Technologies Used  
-- **Django**: Backend framework for building web applications.  
-- **Celery**: Distributed task queue for managing asynchronous jobs.  
-- **Redis**: Message broker for Celery workers.  
-- **Pillow**: Python Imaging Library for generating personalized invitations.  
+```mermaid
+graph TD
+    User -->|Submits Form| DjangoApp
+    DjangoApp -->|Save to DB| SQLiteDB
+    DjangoApp -->|Trigger Task| Celery
+    Celery -->|Broker| Redis
+    Celery -->|Generate Image & Send Email| EmailService
+    EmailService -->|Deliver Invitation| User
+```
 
-## How It Works  
-1. **Registration**: A user fills out the registration form and submits their details.  
-2. **Background Tasks**:  
-   - Celery generates a personalized PNG invitation with the user's name and event date.  
-   - Celery sends a confirmation email containing event details and acknowledgment.  
-3. **Confirmation**: The user is redirected to a confirmation page displaying their subscription details.  
+---
+## 🎥Video
+https://youtu.be/qZWaMfKl_qg
+---
 
-## Getting Started  
+## 🚀 Installation  
 
 ### Prerequisites  
-- Python 3.8+  
-- Redis server  
-- Virtual environment tool (optional but recommended)  
+Ensure you have the following installed:  
+- Python 3.8+
+- Redis  
+- Django 5.x  
+- Virtualenv (optional but recommended)  
 
-### Installation  
+### Steps  
 
-1. Clone the repository:  
-   ```bash  
-   git clone https://github.com/Caio-Felice-Cunha/RegFlow-Django-Celery/
-   cd regflow-plus  
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/Caio-Felice-Cunha/RegFlow-Django-Celery.git
+   cd RegFlow-Django-Celery
+   ```  
+
+2. **Set Up Virtual Environment**  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```  
+
+3. **Install Dependencies**  
+   ```bash
+   pip install -r requirements.txt
+   ```  
+
+4. **Configure Redis**  
+   Make sure Redis is installed and running. Update the `CELERY_BROKER_URL` in `regflow/settings.py` if necessary.  
+
+5. **Apply Migrations**  
+   ```bash
+   python manage.py migrate
+   ```  
+
+6. **Run Redis**  
+   Start your Redis server:  
+   ```bash
+   redis-server
+   ```  
+
+7. **Start Celery Worker**  
+   Open a new terminal and run:  
+   ```bash
+   celery -A regflow worker --loglevel=info
+   ```  
+
+8. **Run the Application**  
+   ```bash
+   python manage.py runserver
+   ```  
+
+9. **Access the Application**  
+   Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.  
+
+---
+
+## 🛠 Usage  
+
+1. Navigate to the homepage and fill out the registration form.  
+2. Upon submission, Celery processes the request asynchronously to:  
+   - Save the user’s data in the database.  
+   - Generate a personalized invitation image.  
+   - Send the invitation to the user’s email.  
+
+---
+
+## 🤝 Contributing  
+
+Contributions are welcome! Follow these steps to contribute:  
+
+1. **Fork the Repository**  
+   Fork the project repository on GitHub.  
+
+2. **Clone Your Fork**  
+   ```bash
+   git clone https://github.com/your-username/RegFlow-Django-Celery.git
+   ```  
+
+3. **Set Up Development Environment**  
+   Follow the installation steps above.  
+
+4. **Create a Feature Branch**  
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```  
+
+5. **Make Your Changes**  
+   Ensure your changes are well-tested.  
+
+6. **Submit a Pull Request**  
+   Push your changes and open a pull request on the main repository.  
+
+---
+
+## ⚠️ Known Issues  
+
+- Celery worker startup might throw errors if Redis is not running.  
+- No real email backend configuration for production; default is console email backend.  
+
+---
+
+## 🌟 Future Plans  
+
+- Add support for other brokers like RabbitMQ.  
+- Implement a production-ready email service using Gmail/SMTP.  
+- Create a Docker container for easier deployment.  
+
+---
+
+## 📜 License  
+
+This project is licensed under the [MIT License](LICENSE).  
+
+---
+
+## 🙌 Acknowledgments  
+
+Special thanks to the Django and Celery communities for their robust tools and frameworks, enabling seamless development of asynchronous workflows.  
+
+---  
+Feel free to open issues or reach out for support at [caiofcunha@hotmail.com](mailto:caiofcunha@hotmail.com).  
