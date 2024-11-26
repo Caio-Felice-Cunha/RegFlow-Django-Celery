@@ -7,6 +7,20 @@
     <title>Registration Confirmed - IASUMMIT 2024</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .invitation-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .invite-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="confirmation-container">
@@ -16,6 +30,9 @@
             <div class="confirmation-message">
                 <p>Thank you for registering for IASUMMIT 2024!</p>
                 <p>We're excited to have you join us for this incredible event.</p>
+            </div>
+            <div class="invitation-image">
+                <img src="/media/invitations/{{token}}.png" alt="IASUMMIT 2024 Invitation" class="invite-img">
             </div>
             <div class="next-steps">
                 <h2>What's Next?</h2>

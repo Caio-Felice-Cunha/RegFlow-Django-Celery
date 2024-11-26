@@ -34,6 +34,9 @@ def create_invitation(name, email):
     token = sha256((email + secret_key).encode()).hexdigest()
 
     save_path = os.path.join(settings.MEDIA_ROOT, f'invitations/{token}.png')
+    
+
+    
     img.save(save_path)
 
     send_mail(
@@ -42,4 +45,6 @@ def create_invitation(name, email):
     'caiofcunha@hotmail.com',
     recipient_list=[email]
     )
+    
+    return token 
 

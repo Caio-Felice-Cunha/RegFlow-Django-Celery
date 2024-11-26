@@ -21,14 +21,17 @@ def aplicationprocess(request):
     if Person.objects.filter(email=email).exists():
         return render(request, 'subscription.html', {
             'error': 'This email is already registered for the event.',
-            'name': name,  # Return the name to preserve the form data
-            'email': email  # Return the email to preserve the form data
+            'name': name,
+            'email': email
         })
 
     # If email doesn't exist, proceed with registration
     person = Person(name=name, email=email)
     person.save()
-    token = create_invitation.delay(name, email)
+    
+    # Execute the task and get the token
+    task_result = create_invitation.delay(name, email)
+    token = task_result.get()  # Wait for the task to complete and get the token
     
     return render(request, 'register_confirmed.html', {'token': token})
 
