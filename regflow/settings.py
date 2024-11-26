@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+#from .Credencial import PASSWORD
+from django.core.mail import send_mail
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -116,3 +118,21 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email
+## For development/testing, I can use Django's console email backend instead [in a real world scenario, I would use a real email service like Gmail, Outlook, etc.], which just prints emails to the console:
+DEFAULT_FROM_EMAIL = 'CAIO CUNHA | IASUMMIT'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+
+# DEFAULT_FROM_EMAIL = 'IA.Inc | IASUMMIT'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'events@iasummit.com.br'
+# EMAIL_HOST_PASSWORD = PASSWORD
+
