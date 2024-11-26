@@ -23,7 +23,9 @@ graph TD
 
 ---
 ## 🎥Video
-https://youtu.be/qZWaMfKl_qg
+[![RegFlow-Django-Celery-Cover](https://github.com/user-attachments/assets/24befd6a-d68d-4cfd-9ba3-287bb4844644)](https://youtu.be/qZWaMfKl_qg)
+
+
 ---
 
 ## 🚀 Installation  
