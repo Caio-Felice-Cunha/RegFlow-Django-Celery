@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'subscription',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -125,9 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FROM_EMAIL = 'CAIO CUNHA | IASUMMIT'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-
-
 # DEFAULT_FROM_EMAIL = 'IA.Inc | IASUMMIT'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
@@ -136,3 +134,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_USER = 'events@iasummit.com.br'
 # EMAIL_HOST_PASSWORD = PASSWORD
 
+#CELERY
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_CONTENT = 'json'
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True
